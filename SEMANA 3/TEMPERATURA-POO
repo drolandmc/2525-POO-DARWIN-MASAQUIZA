@@ -1,0 +1,51 @@
+class SemanaClima:
+    def __init__(self):
+        """
+        Constructor de la clase. Inicializa la lista de temperaturas.
+        Encapsulación: _temperaturas es un atributo "protegido".
+        """
+        self._temperaturas = []
+
+    def ingresar_temperaturas(self):
+        """
+        Solicita al usuario las temperaturas de los 7 días de la semana.
+        Almacena los valores en el atributo _temperaturas.
+        """
+        dias = ["lunes", "martes", "miércoles", "jueves", "viernes", "sábado", "domingo"]
+        
+        for dia in dias:
+            while True:
+                try:
+                    temp = float(input(f"Ingrese la temperatura del {dia}: "))
+                    self._temperaturas.append(temp)
+                    break
+                except ValueError:
+                    print("¡Error! Debe ingresar un valor numérico.")
+
+    def calcular_promedio(self):
+        """
+        Calcula el promedio de las temperaturas almacenadas.
+        Retorna el promedio redondeado a 2 decimales.
+        """
+        return round(sum(self._temperaturas) / len(self._temperaturas), 2) if self._temperaturas else 0
+
+def main():
+    """
+    Función principal para demostrar el uso de la clase SemanaClima.
+    """
+    print("=" * 50)
+    print("REGISTRO SEMANAL DE TEMPERATURAS (POO)")
+    print("=" * 50)
+    
+    # Crear objeto y procesar datos
+    semana = SemanaClima()
+    semana.ingresar_temperaturas()
+    promedio = semana.calcular_promedio()
+    
+    # Mostrar resultados
+    print("\n" + "=" * 50)
+    print(f"→ Promedio semanal: {promedio}°C")
+    print("=" * 50)
+
+if __name__ == "__main__":
+    main()

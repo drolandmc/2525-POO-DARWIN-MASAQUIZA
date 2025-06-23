@@ -1,0 +1,109 @@
+"""
+Sistema de Reservas de Hotel - Ejemplo POO
+Modela un hotel con habitaciones, clientes y reservas.
+"""
+
+class Habitacion:
+    """Representa una habitación del hotel con sus atributos y disponibilidad."""
+    
+    def __init__(self, numero: int, tipo: str, precio_noche: float):
+        # Constructor: inicializa una habitación con número, tipo y precio
+        self.numero = numero
+        self.tipo = tipo  # Ej: "Individual", "Doble", "Suite"
+        self.precio_noche = precio_noche
+        self.disponible = True  # Estado inicial: disponible
+    
+    def cambiar_estado(self, estado: bool):
+        """Actualiza la disponibilidad de la habitación."""
+        self.disponible = estado
+    
+    def __str__(self):
+        # Representación amigable del objeto
+        return f"Habitación {self.numero} ({self.tipo}) - ${self.precio_noche}/noche"
+
+
+class Cliente:
+    """Representa a un cliente que realiza reservas."""
+    
+    def __init__(self, id_cliente: int, nombre: str, email: str):
+        # Constructor: inicializa cliente con identificador, nombre y contacto
+        self.id_cliente = id_cliente
+        self.nombre = nombre
+        self.email = email
+    
+    def __str__(self):
+        return f"Cliente: {self.nombre} (ID: {self.id_cliente})"
+
+
+class Reserva:
+    """Modela una reserva asociada a un cliente y una habitación."""
+    
+    def __init__(self, cliente: Cliente, habitacion: Habitacion, noches: int):
+        self.cliente = cliente
+        self.habitacion = habitacion
+        self.noches = noches
+        self.total = habitacion.precio_noche * noches
+    
+    def mostrar_detalle(self):
+        """Muestra información detallada de la reserva."""
+        print(f"Reserva para {self.cliente.nombre}")
+        print(f"• Habitación: {self.habitacion.tipo} (N°{self.habitacion.numero})")
+        print(f"• Estancia: {self.noches} noches | Total: ${self.total}")
+
+
+class Hotel:
+    """Gestiona las operaciones del hotel: habitaciones y reservas."""
+    
+    def __init__(self, nombre: str):
+        self.nombre = nombre
+        self.habitaciones = []
+        self.reservas = []
+    
+    def agregar_habitacion(self, habitacion: Habitacion):
+        """Añade una habitación al inventario del hotel."""
+        self.habitaciones.append(habitacion)
+    
+    def buscar_habitacion(self, tipo: str = None) -> list:
+        """Busca habitaciones disponibles, opcionalmente por tipo."""
+        disponibles = [h for h in self.habitaciones if h.disponible]
+        if tipo:
+            return [h for h in disponibles if h.tipo.lower() == tipo.lower()]
+        return disponibles
+    
+    def hacer_reserva(self, cliente: Cliente, num_habitacion: int, noches: int):
+        """Realiza una reserva si la habitación está disponible."""
+        for habitacion in self.habitaciones:
+            if habitacion.numero == num_habitacion and habitacion.disponible:
+                habitacion.cambiar_estado(False)
+                reserva = Reserva(cliente, habitacion, noches)
+                self.reservas.append(reserva)
+                return reserva
+        return None
+    
+    def mostrar_reservas(self):
+        """Lista todas las reservas activas del hotel."""
+        print(f"\n--- Reservas en {self.nombre} ---")
+        for reserva in self.reservas:
+            reserva.mostrar_detalle()
+
+
+# Ejemplo de uso
+if __name__ == "__main__":
+    # Crear hotel
+    mi_hotel = Hotel("Grand Palace")
+    
+    # Añadir habitaciones
+    mi_hotel.agregar_habitacion(Habitacion(101, "Individual", 50))
+    mi_hotel.agregar_habitacion(Habitacion(102, "Doble", 85))
+    mi_hotel.agregar_habitacion(Habitacion(103, "Suite", 200))
+    
+    # Registrar cliente
+    cliente1 = Cliente(1, "Ana Torres", "ana@email.com")
+    
+    # Buscar habitación disponible y hacer reserva
+    habitaciones_dobles = mi_hotel.buscar_habitacion("doble")
+    if habitaciones_dobles:
+        reserva = mi_hotel.hacer_reserva(cliente1, habitaciones_dobles[0].numero, 3)
+    
+    # Mostrar todas las reservas
+    mi_hotel.mostrar_reservas()

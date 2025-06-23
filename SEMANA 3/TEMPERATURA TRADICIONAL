@@ -1,0 +1,44 @@
+def ingresar_temperaturas():
+    """
+    Solicita al usuario las temperaturas de los 7 días de la semana.
+    Retorna una lista con los valores ingresados.
+    """
+    dias = ["lunes", "martes", "miércoles", "jueves", "viernes", "sábado", "domingo"]
+    temperaturas = []
+    
+    for dia in dias:
+        while True:
+            try:
+                temp = float(input(f"Ingrese la temperatura del {dia}: "))
+                temperaturas.append(temp)
+                break
+            except ValueError:
+                print("¡Error! Debe ingresar un valor numérico.")
+    return temperaturas
+
+def calcular_promedio(temperaturas):
+    """
+    Calcula el promedio de una lista de temperaturas.
+    Retorna el promedio redondeado a 2 decimales.
+    """
+    return round(sum(temperaturas) / len(temperaturas), 2) if temperaturas else 0
+
+def main():
+    """
+    Función principal que coordina la entrada de datos y el cálculo del promedio.
+    """
+    print("=" * 50)
+    print("REGISTRO SEMANAL DE TEMPERATURAS")
+    print("=" * 50)
+    
+    # Obtener datos y calcular promedio
+    temps_semana = ingresar_temperaturas()
+    promedio = calcular_promedio(temps_semana)
+    
+    # Mostrar resultados
+    print("\n" + "=" * 50)
+    print(f"→ Promedio semanal: {promedio}°C")
+    print("=" * 50)
+
+if __name__ == "__main__":
+    main()
