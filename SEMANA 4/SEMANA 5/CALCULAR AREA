@@ -1,0 +1,31 @@
+# Programa para calcular el área de un triángulo
+# Este programa solicita al usuario la base y la altura de un triángulo,
+# luego calcula y muestra el área utilizando la fórmula: (base * altura) / 2.git init
+
+# Solicitar la base del triángulo al usuario
+base = float(input("Ingrese la base del triángulo en cm: "))
+
+# Solicitar la altura del triángulo al usuario
+altura = float(input("Ingrese la altura del triángulo en cm: "))
+
+# Tipos de datos utilizados:
+
+# float (para base, altura y área),
+
+# string (entrada del usuario),
+
+# boolean (verificación de área válida)."
+
+# Calcular el área
+area = (base * altura) / 2
+
+# Evaluar si el área es mayor a cero
+area_valida = area > 0  # boolean
+
+# Mostrar el resultado
+print("El área del triángulo es:", area, "cm²")
+
+# Verificación extra para mostrar si el área calculada es válida
+print("¿El área calculada es válida?", area_valida)
+
+# Variables como base, altura, area, area_valida usan snake_case.
