@@ -1,0 +1,50 @@
+# Explicación del Código "__init__" (Constructor):
+
+# Se ejecuta automáticamente cuando se crea un nuevo objeto.
+
+# En este caso, inicializa el nombre del usuario y abre un archivo de texto para registrar su conexión.
+
+# "__del__ " (Destructor):
+
+# Se ejecuta cuando el objeto se destruye (al finalizar el programa o al usar del).
+
+# Se encarga de cerrar el archivo y registrar que el usuario salió del sistema.
+
+
+# Al finalizar el programa, Python llama automáticamente al destructor (__del__)
+# También puedes forzar la destrucción con `del usuario1` si deseas ver su efecto antes de terminar
+
+class RegistroUsuario:
+    def __init__(self, nombre_usuario, archivo="registro.txt"):
+        """
+        Constructor de la clase.
+        Se ejecuta automáticamente al crear un nuevo objeto.
+        Inicializa el nombre del usuario y abre el archivo para registrar.
+        """
+        self.nombre = nombre_usuario
+        self.archivo = open(archivo, "a")  # Abrimos el archivo en modo adjuntar
+        print(f"[INFO] Usuario '{self.nombre}' creado.")
+        self.archivo.write(f"Usuario registrado: {self.nombre}\n")
+
+    def saludar(self):
+        print(f"Hola, {self.nombre}. ¡Bienvenido al sistema!")
+
+    def __del__(self):
+        """
+        Destructor de la clase.
+        Se ejecuta automáticamente cuando el objeto es destruido.
+        Aquí se cierra el archivo como parte de la limpieza.
+        """
+        print(f"[INFO] Cerrando sesión de '{self.nombre}'.")
+        self.archivo.write(f"Usuario desconectado: {self.nombre}\n")
+        self.archivo.close()
+
+# Ejecución principal del programa
+if __name__ == "__main__":
+    usuario1 = RegistroUsuario("Carlos")
+    usuario1.saludar()
+
+    usuario2 = RegistroUsuario("Laura")
+    usuario2.saludar()
+
+

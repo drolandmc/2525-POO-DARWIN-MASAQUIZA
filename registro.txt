@@ -1,0 +1,4 @@
+Usuario registrado: Carlos
+Usuario desconectado: Carlos
+Usuario registrado: Laura
+Usuario desconectado: Laura
