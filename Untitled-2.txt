@@ -1,0 +1,2 @@
+mensaje="hoa"
+print (mensaje);
