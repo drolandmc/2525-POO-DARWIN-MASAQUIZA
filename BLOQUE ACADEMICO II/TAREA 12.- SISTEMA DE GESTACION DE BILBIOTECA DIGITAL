@@ -1,0 +1,35 @@
+Añadir Cien años de soledad: OK
+Añadir 1984: OK
+Añadir El hobbit: OK
+Añadir Sapiens: OK
+
+-- Registro de usuarios --
+Registrar u1: True
+Registrar u2: True
+Registrar u1 duplicado: False
+
+-- Préstamos --
+Prestar '1984' a u1: True
+Prestar 'El hobbit' a u1: True
+Intentar prestar '1984' a u2 (ya prestado): False
+
+Préstamos de u1:
+ - '1984' por George Orwell (ISBN: 978-0451524935) - Distopía
+ - 'El hobbit' por J. R. R. Tolkien (ISBN: 978-0547928227) - Fantasía
+
+-- Devoluciones --
+Devolver '1984' por u1: True
+Intentar devolver 'Sapiens' por u1 (no prestado): False
+
+-- Búsquedas --
+Buscar por autor 'Tolkien': ["'El hobbit' por J. R. R. Tolkien (ISBN: 978-0547928227) - Fantasía"]
+Buscar por título 'sapiens': ["'Sapiens' por Yuval Noah Harari (ISBN: 978-0062316097) - Divulgación"]
+Buscar por categoría 'Novela': ["'Cien años de soledad' por Gabriel García Márquez (ISBN: 978-0307474728) - Novela"]
+
+-- Baja de usuario --
+Dar de baja u1 (debe fallar si tiene préstamos): False
+Dar de baja u1 (sin préstamos): True
+
+-- Eliminar libro --
+Quitar 'Sapiens': True
+Quitar '1984' (ya devuelto): True
