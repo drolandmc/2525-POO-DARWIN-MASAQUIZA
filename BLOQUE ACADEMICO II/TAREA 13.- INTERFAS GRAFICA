@@ -1,0 +1,67 @@
+import tkinter as tk
+from tkinter import messagebox
+
+# ================================
+# Clase principal de la aplicación
+# ================================
+class AplicacionGUI:
+    def __init__(self, root):
+        # Configuración de la ventana principal
+        self.root = root
+        self.root.title("Gestión de Datos - Ejemplo GUI")
+        self.root.geometry("400x400")
+
+        # Etiqueta principal
+        self.label_titulo = tk.Label(root, text="Aplicación GUI Básica", font=("Arial", 14, "bold"))
+        self.label_titulo.pack(pady=10)
+
+        # Campo de texto
+        self.label_ingreso = tk.Label(root, text="Ingrese un dato:")
+        self.label_ingreso.pack()
+
+        self.entry_dato = tk.Entry(root, width=40)
+        self.entry_dato.pack(pady=5)
+
+        # Botones de acción
+        self.frame_botones = tk.Frame(root)
+        self.frame_botones.pack(pady=10)
+
+        self.btn_agregar = tk.Button(self.frame_botones, text="Agregar", command=self.agregar_dato)
+        self.btn_agregar.grid(row=0, column=0, padx=5)
+
+        self.btn_limpiar = tk.Button(self.frame_botones, text="Limpiar", command=self.limpiar_lista)
+        self.btn_limpiar.grid(row=0, column=1, padx=5)
+
+        # Lista para mostrar datos
+        self.label_lista = tk.Label(root, text="Datos Ingresados:")
+        self.label_lista.pack()
+
+        self.lista_datos = tk.Listbox(root, width=50, height=10)
+        self.lista_datos.pack(pady=5)
+
+    # ================================
+    # Funcionalidades
+    # ================================
+    def agregar_dato(self):
+        """Agrega el dato ingresado en la lista."""
+        dato = self.entry_dato.get().strip()
+        if dato:
+            self.lista_datos.insert(tk.END, dato)
+            self.entry_dato.delete(0, tk.END)  # limpiar campo de texto
+        else:
+            messagebox.showwarning("Advertencia", "Debe ingresar un dato antes de agregar.")
+
+    def limpiar_lista(self):
+        """Limpia todos los datos de la lista."""
+        if self.lista_datos.size() > 0:
+            self.lista_datos.delete(0, tk.END)
+        else:
+            messagebox.showinfo("Información", "La lista ya está vacía.")
+
+# ================================
+# Ejecución de la aplicación
+# ================================
+if __name__ == "__main__":
+    root = tk.Tk()
+    app = AplicacionGUI(root)
+    root.mainloop()
